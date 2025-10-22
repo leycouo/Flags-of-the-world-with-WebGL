@@ -402,7 +402,40 @@ function drawFlagToCanvas(targetCanvas, width, flagData) {
 
 const flags = {
 
-    
+     bolivia: (x, y, w, h) => {
+        // Colores de Bolivia
+        const red = [0.95, 0.1, 0.1];
+        const yellow = [0.99, 0.8, 0];
+        const green = [0, 0.6, 0.25];
+        
+        // Proporciones: 1/3 para cada franja
+        const stripeH = h / 3;
+        const y1 = y + stripeH; // Fin de la franja roja
+        const y2 = y1 + stripeH; // Fin de la franja amarilla
+
+        let positions = [];
+        let colors = [];
+
+        // Franja Roja (Superior)
+        positions.push(
+            x, y, x + w, y, x, y1, x + w, y, x + w, y1, x, y1
+        );
+        colors.push(...new Array(6).fill(red).flat());
+
+        // Franja Amarilla (Central)
+        positions.push(
+            x, y1, x + w, y1, x, y2, x + w, y1, x + w, y2, x, y2
+        );
+        colors.push(...new Array(6).fill(yellow).flat());
+        
+        // Franja Verde (Inferior)
+        positions.push(
+            x, y2, x + w, y2, x, y + h, x + w, y2, x + w, y + h, x, y + h
+        );
+        colors.push(...new Array(6).fill(green).flat());
+        
+        return {positions, colors};
+    },
     rumania: (x, y, w, h) => {
         const w3 = w / 3;
         return {
